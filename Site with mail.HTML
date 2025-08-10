@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>תיקון אופניים של בארי</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: radial-gradient( circle at 10% 10%, rgba(255,255,255,0.06), transparent 10%),
+                  radial-gradient( circle at 90% 90%, rgba(0,0,0,0.06), transparent 10%),
+                  linear-gradient(135deg, #e0f7fa 0%, #e8fef6 40%, #f7f8ff 100%);
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    .bike-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.06;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .container {
+      position: relative;
+      z-index: 10;
+    }
+    label, input, textarea, select, button {
+      direction: rtl;
+      text-align: right;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <div class="bike-bg" aria-hidden="true">
+    <svg width="720" height="360" viewBox="0 0 720 360" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <g stroke="black" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <circle cx="150" cy="250" r="80" />
+        <circle cx="570" cy="250" r="80" />
+        <path d="M150 250 L290 160 L370 200 L470 150" />
+        <path d="M370 200 L430 140 L470 150" />
+        <path d="M290 160 L330 100" />
+        <path d="M430 140 L460 90" />
+        <path d="M320 200 L360 250" />
+        <path d="M360 250 L420 250" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="container max-w-3xl mx-auto p-6">
+    <header class="mb-6 text-right">
+      <h1 class="text-4xl font-extrabold text-slate-800">תיקון אופניים של בארי</h1>
+      <p class="mt-1 text-slate-600">השאירו פרטים ונחזור אליכם עם הצעת מחיר ותזמון</p>
+    </header>
+
+    <main class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6">
+      <form id="repairForm" class="space-y-4" autocomplete="on" enctype="multipart/form-data">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="firstName" class="block text-sm font-medium text-slate-700">שם פרטי</label>
+            <input id="firstName" name="firstName" required type="text" placeholder="אבי" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-sky-300 p-2">
+          </div>
+
+          <div>
+            <label for="lastName" class="block text-sm font-medium text-slate-700">שם משפחה</label>
+            <input id="lastName" name="lastName" required type="text" placeholder="כהן" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-sky-300 p-2">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="budget" class="block text-sm font-medium text-slate-700">תקציב (ש״ח)</label>
+            <input id="budget" name="budget" type="number" min="0" step="1" placeholder="200" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-sky-300 p-2">
+          </div>
+
+          <div>
+            <label for="brandModel" class="block text-sm font-medium text-slate-700">חברה ודגם של אופניים</label>
+            <input id="brandModel" name="brandModel" type="text" placeholder="Trek Marlin 7" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-sky-300 p-2">
+          </div>
+        </div>
+
+        <div>
+          <label for="location" class="block text-sm font-medium text-slate-700">מאיפה בארץ</label>
+          <select id="location" name="location" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-sky-300 p-2">
+            <option value="">בחר / כתוב מקום</option>
+            <option>תל אביב</option>
+            <option>ירושלים</option>
+            <option>חיפה</option>
+            <option>באר שבע</option>
+            <option>רמת גן</option>
+            <option>אחר (כתוב בהערות)</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="problem" class="block text-sm font-medium text-slate-700">מה התקלה</label>
+          <textarea id="problem" name="problem" required rows="3" placeholder="תיאור התקלה — דוגמה: הילוך מקפץ, פנצ'ר חוזר" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-sky-300 p-2"></textarea>
+        </div>
+
+        <div>
+          <label for="notes" class="block text-sm font-medium text-slate-700">הערות נוספות</label>
+          <textarea id="notes" name="notes" rows="2" placeholder="הערות נוספות — ניקיון, חלקים מיוחדים, עדיפות בתאריכים" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-sky-300 p-2"></textarea>
+        </div>
+
+        <div>
+          <label for="imageUpload" class="block text-sm font-medium text-slate-700">העלאת תמונה של האופניים או התקלה</label>
+          <input id="imageUpload" name="imageUpload" type="file" accept="image/png, image/jpeg, image/gif" class="mt-1 block w-full text-slate-600" />
+          <p class="text-xs text-slate-400 mt-1">ניתן להעלות קובץ jpg, png או gif</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mt-4">
+          <div class="flex gap-3">
+            <button type="submit" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-md shadow-sm">שלח מייל עם הפרטים</button>
+            <button id="downloadJson" type="button" class="px-4 py-2 border border-slate-300 rounded-md hover:bg-slate-50">הורד JSON</button>
+            <button id="showPreview" type="button" class="px-4 py-2 border border-slate-300 rounded-md hover:bg-slate-50">הצג תקציר</button>
+          </div>
+
+          <p class="text-sm text-slate-500">ניתן להוריד את הנתונים כקובץ JSON או לראות תקציר לפני שליחה.</p>
+        </div>
+
+      </form>
+
+      <section id="previewArea" class="mt-5 hidden">
+        <h2 class="text-lg font-semibold text-slate-800 mb-2">תקציר הפרטים</h2>
+        <div id="previewCard" class="bg-slate-50 p-4 rounded-md border border-slate-100 text-slate-700"></div>
+      </section>
+    </main>
+
+    <footer class="mt-6 text-right text-sm text-slate-500">
+      <p>תיקון אופניים של בארי — פנה אלינו לקבלת הצעת מחיר מדויקת.</p>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById('repairForm');
+    const previewArea = document.getElementById('previewArea');
+    const previewCard = document.getElementById('previewCard');
+    const downloadBtn = document.getElementById('downloadJson');
+    const showPreviewBtn = document.getElementById('showPreview');
+    const emailRecipient = "abir107@gmail.com"; // שנה אם תרצה כתובת אחרת
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text.replace(/[&<>"']/g, function(m) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];
+      });
+    }
+
+    function gatherData() {
+      const imageInput = form.imageUpload;
+      const imageFileName = imageInput.files.length > 0 ? imageInput.files[0].name : "לא הועלתה תמונה";
+
+      return {
+        firstName: form.firstName.value.trim(),
+        lastName: form.lastName.value.trim(),
+        budget: form.budget.value ? Number(form.budget.value) : null,
+        brandModel: form.brandModel.value.trim(),
+        location: form.location.value.trim(),
+        problem: form.problem.value.trim(),
+        notes: form.notes.value.trim(),
+        imageFileName: imageFileName,
+        submittedAt: new Date().toISOString()
+      };
+    }
+
+    function renderPreview(data) {
+      previewCard.innerHTML = `
+        <div class="grid gap-1">
+          <div><strong>שם:</strong> ${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)}</div>
+          <div><strong>תקציב:</strong> ${data.budget !== null ? data.budget + ' ש״ח' : 'לא צוין'}</div>
+          <div><strong>חברה ודגם:</strong> ${escapeHtml(data.brandModel) || 'לא צוין'}</div>
+          <div><strong>מאיפה בארץ:</strong> ${escapeHtml(data.location) || 'לא צוין'}</div>
+          <div><strong>מה התקלה:</strong> ${escapeHtml(data.problem)}</div>
+          <div><strong>הערות:</strong> ${escapeHtml(data.notes) || '—'}</div>
+          <div><strong>שם קובץ תמונה:</strong> ${escapeHtml(data.imageFileName)}</div>
+          <div class="text-xs text-slate-400 mt-2"><em>נוצר ב־${new Date(data.submittedAt).toLocaleString('he-IL')}</em></div>
+        </div>
+      `;
+      previewArea.classList.remove('hidden');
+      previewArea.scrollIntoView({behavior: 'smooth'});
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = gatherData();
+
+      let subject = encodeURIComponent(`בקשת תיקון אופניים - ${data.firstName} ${data.lastName}`);
+      let bodyLines = [
+        `שם פרטי: ${data.firstName}`,
+        `שם משפחה: ${data.lastName}`,
+        `תקציב: ${data.budget !== null ? data.budget + ' ש״ח' : 'לא צוין'}`,
+        `חברה ודגם: ${data.brandModel || 'לא צוין'}`,
+        `מאיפה בארץ: ${data.location || 'לא צוין'}`,
+        `מה התקלה: ${data.problem}`,
+        `הערות נוספות: ${data.notes || '—'}`,
+        `שם קובץ תמונה: ${data.imageFileName}`,
+        `נשלח בתאריך: ${new Date(data.submittedAt).toLocaleString('he-IL')}`
+      ];
+      let body = encodeURIComponent(bodyLines.join('\n'));
+
+      let gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailRecipient}&su=${subject}&body=${body}`;
+      window.open(gmailUrl, '_blank');
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      const data = gatherData();
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `repair_${data.firstName || 'unknown'}_${new Date().toISOString().slice(0,10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+
+    showPreviewBtn.addEventListener('click', () => {
+      const data = gatherData();
+      if (!data.firstName && !data.lastName && !data.problem) {
+        alert('מלא/י לפחות שם ותיאור התקלה כדי לראות תקציר.');
+        return;
+      }
+      renderPreview(data);
+    });
+  </script>
+</body>
+</html>
